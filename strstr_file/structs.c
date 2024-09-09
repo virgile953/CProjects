@@ -9,13 +9,19 @@ void	free_file_content(t_file *file)
 	if (file->filename)
 		free(file->filename);
 }
-void	init_filestruct(t_file *file)
+t_file	*init_filestruct(void)
 {
+	t_file	*file;
+
+	file = malloc(sizeof(t_file));
+	if (!file)
+		return (NULL);
 	file->content = 0;
 	file->fd = 0;
 	file->content_len = 0;
 	file->filename = 0;
 	file->filename = 0;
+	return (file);
 }
 
 void	free_file(t_file *file)

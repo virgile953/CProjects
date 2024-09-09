@@ -1,6 +1,7 @@
 #ifndef STRSTR_H
 # define STRSTR_H
 # include <dirent.h>
+# include <errno.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -8,7 +9,8 @@
 # include <unistd.h>
 # define BUF_SIZE 4096
 # define MAX_SIZE 2147483647
-
+# define FT_REG 8
+# define FT_DIR 4
 typedef struct s_file
 {
 	int		fd;
@@ -39,6 +41,10 @@ void		ft_putnbr(int nb);
 int			ft_atoi(char *str);
 void		free_file(t_file *file);
 void		free_files(t_files *files);
-void		init_filestruct(t_file *file);
+t_file		*init_filestruct(void);
+int			init_input(t_file *file, int argc, char **argv);
+char		*ft_strcat(char *dest, char *src);
+void		open_dir(char *path);
+void		MakeFullName(char full_path[512], char *path, struct dirent *dir);
 
 #endif

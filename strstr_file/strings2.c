@@ -27,3 +27,13 @@ char	*ft_strdup(char *src)
 	ret[len] = 0;
 	return (ret);
 }
+char	*ft_strcat(char *dest, char *src)
+{
+	int	lendest;
+
+	lendest = ft_strlen(dest);
+	while (*src)
+		dest[lendest++] = *src++;
+	dest[lendest] = 0;
+	return (dest);
+}
