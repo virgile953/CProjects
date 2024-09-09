@@ -1,28 +1,62 @@
 #include "strstr.h"
 
-int	main(int argc, char **argv)
+void	display_filenames(t_files *files)
 {
-	t_file	*file;
+	int	i;
 
-	open_dir(".");
-	file = init_filestruct();
-	if (init_input(file, argc, argv) == 1)
-		return (1);
-	// for testing
-	ft_putstr(ft_strstr(file->content, argv[2]));
-	return (display_error("File opened and closed gracefully\n", file));
+	i = 0;
+	while (i < files->nb_files)
+	{
+		printf("file %d: %s\n", i, files->files[i].filename);
+		i++;
+	}
 }
 
-int	init_input(t_file *file, int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	if (!file)
-		return (display_error("Coul't malloc file struct in memory\n", file));
+	t_files	*files;
+	int		i;
+
+	files = init_filesstruct();
+	get_filecount(".", files);
+	printf("%d files\n", files->nb_files);
+	if (init_input(files, argc, argv) == 1)
+		return (1);
+	// init files
+	i = 0;
+	get_filenames(".", files, &i);
+	display_filenames(files);
+	i = 0;
+	while (i < files->nb_files)
+	{
+		if (!ft_get_content(&files->files[i]))
+			return (display_error("There was a problem reading file\n", files));
+		i++;
+	}
+	ft_putstr(ft_strstr(files[0].files[0].content, argv[2]));
+	return (display_error("File opened and closed gracefully\n", files));
+}
+
+int	init_input(t_files *files, int argc, char **argv)
+{
+	int	i;
+
+	(void)argv;
+	i = 0;
+	if (!files)
+		return (display_error("Coul't malloc file struct in memory\n", files));
+	files->files = malloc(sizeof(t_file) * (files->nb_files));
+	if (!files->files)
+		return (display_error("Coul't malloc file struct in memory\n", files));
+	while (i < files->nb_files)
+	{
+		files->files[i].content = 0;
+		files->files[i].fd = 0;
+		files->files[i].content_len = 0;
+		files->files[i].filename = 0;
+		files->files[i++].filename = 0;
+	}
 	if (argc < 2)
-		return (display_error("There should be an agrument there!\n", file));
-	file->filename = ft_strdup(argv[1]);
-	if (!file->filename)
-		return (display_error("Could not allocate filename in memory\n", file));
-	if (!ft_get_content(file))
-		return (display_error("There was a problem reading the file\n", file));
+		return (display_error("There should be an agrument there!\n", files));
 	return (0);
 }

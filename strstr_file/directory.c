@@ -1,8 +1,6 @@
 #include "strstr.h"
-#include <dirent.h>
-#include <errno.h>
 
-void	open_dir(char *path)
+void	get_filecount(char *path, t_files *files)
 {
 	DIR				*d;
 	struct dirent	*dir;
@@ -11,27 +9,49 @@ void	open_dir(char *path)
 	d = opendir(path);
 	if (d)
 	{
-		dir = readdir(d);
-		while (dir != NULL)
+		while ((dir = readdir(d)) != NULL)
 		{
 			if (ft_strncmp(dir->d_name, ".", 1) == 0)
-			{
-				dir = readdir(d);
 				continue ;
-			}
 			full_path[0] = '\0';
-			MakeFullName(full_path, path, dir);
+			get_fullname(full_path, path, dir);
 			if (dir->d_type == FT_REG)
-				printf("%s\n", full_path);
+				files->nb_files++;
 			if (dir->d_type == FT_DIR)
-				open_dir(full_path);
-			dir = readdir(d);
+				get_filecount(full_path, files);
 		}
 		closedir(d);
 	}
 }
 
-void	MakeFullName(char full_path[512], char *path, struct dirent *dir)
+void	get_filenames(char *path, t_files *files, int *i)
+{
+	DIR				*d;
+	struct dirent	*dir;
+	char			full_path[512];
+
+	d = opendir(path);
+	if (d)
+	{
+		while ((dir = readdir(d)) != NULL)
+		{
+			if (ft_strncmp(dir->d_name, ".", 1) == 0)
+				continue ;
+			full_path[0] = '\0';
+			get_fullname(full_path, path, dir);
+			if (dir->d_type == FT_REG)
+			{
+				files->files[*i].filename = ft_strdup(full_path);
+				*i = *i + 1;
+			}
+			if (dir->d_type == FT_DIR)
+				get_filenames(full_path, files, i);
+		}
+			closedir(d);
+	}
+}
+
+void	get_fullname(char full_path[512], char *path, struct dirent *dir)
 {
 	ft_strcat(full_path, path);
 	ft_strcat(full_path, "/");

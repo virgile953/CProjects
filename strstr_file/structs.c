@@ -9,19 +9,25 @@ void	free_file_content(t_file *file)
 	if (file->filename)
 		free(file->filename);
 }
-t_file	*init_filestruct(void)
+void	init_filestruct(t_file *file)
 {
-	t_file	*file;
-
-	file = malloc(sizeof(t_file));
-	if (!file)
-		return (NULL);
 	file->content = 0;
 	file->fd = 0;
 	file->content_len = 0;
 	file->filename = 0;
 	file->filename = 0;
-	return (file);
+}
+
+t_files	*init_filesstruct(void)
+{
+	t_files	*files;
+
+	files = malloc(sizeof(t_files));
+	if (!files)
+		return (NULL);
+	files->nb_files = 0;
+	files->files = 0;
+	return (files);
 }
 
 void	free_file(t_file *file)
@@ -40,11 +46,11 @@ void	free_files(t_files *files)
 	i = 0;
 	if (files)
 	{
-		while (files->nb_files < i)
-		{
-			free_file_content(files[i].files);
-			i++;
-		}
+		while (i < files->nb_files)
+			free_file_content(&files->files[i++]);
+		i++;
+		if (files->files)
+			free(files->files);
 		free(files);
 	}
 }

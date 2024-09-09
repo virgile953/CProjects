@@ -11,6 +11,7 @@
 # define MAX_SIZE 2147483647
 # define FT_REG 8
 # define FT_DIR 4
+
 typedef struct s_file
 {
 	int		fd;
@@ -32,7 +33,7 @@ char		*ft_strcpy(char *dest, char *src);
 char		*ft_strdup(char *src);
 void		ft_putstr(char *str);
 void		ft_putchar(char c);
-int			display_error(char *error, t_file *file);
+int			display_error(char *error, t_files *files);
 int			ft_open(t_file *file);
 int			ft_close(t_file *file);
 int			ft_get_content(t_file *file);
@@ -41,10 +42,12 @@ void		ft_putnbr(int nb);
 int			ft_atoi(char *str);
 void		free_file(t_file *file);
 void		free_files(t_files *files);
-t_file		*init_filestruct(void);
-int			init_input(t_file *file, int argc, char **argv);
+t_files		*init_filesstruct(void);
+void		init_filestruct(t_file *file);
+int			init_input(t_files *files, int argc, char **argv);
 char		*ft_strcat(char *dest, char *src);
-void		open_dir(char *path);
-void		MakeFullName(char full_path[512], char *path, struct dirent *dir);
+void		get_filecount(char *path, t_files *files);
+void		get_fullname(char full_path[512], char *path, struct dirent *dir);
+void		get_filenames(char *path, t_files *files, int *i);
 
 #endif
