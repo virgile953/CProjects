@@ -24,7 +24,7 @@ int	ft_close(t_file *file)
 
 int	ft_get_content(t_file *file)
 {
-	int	sizeread;
+	size_t	sizeread;
 
 	if (!get_file_len(file))
 		return (0);

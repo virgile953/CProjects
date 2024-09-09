@@ -24,5 +24,6 @@ char	*ft_strdup(char *src)
 	if (!ret)
 		return (0);
 	ft_strcpy(ret, src);
+	ret[len] = 0;
 	return (ret);
 }

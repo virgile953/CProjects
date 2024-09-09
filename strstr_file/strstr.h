@@ -1,5 +1,6 @@
 #ifndef STRSTR_H
 # define STRSTR_H
+# include <dirent.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -16,6 +17,12 @@ typedef struct s_file
 	size_t	content_len;
 }			t_file;
 
+typedef struct s_files
+{
+	t_file	*files;
+	int		nb_files;
+}			t_files;
+
 int			ft_strlen(char *str);
 int			ft_strncmp(char *s1, char *s2, int n);
 char		*ft_strstr(char *haystack, char *needle);
@@ -30,5 +37,8 @@ int			ft_get_content(t_file *file);
 size_t		get_file_len(t_file *file);
 void		ft_putnbr(int nb);
 int			ft_atoi(char *str);
+void		free_file(t_file *file);
+void		free_files(t_files *files);
+void		init_filestruct(t_file *file);
 
 #endif

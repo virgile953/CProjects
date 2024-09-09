@@ -36,7 +36,9 @@ char	*ft_strstr(char *haystack, char *needle)
 
 void	ft_putstr(char *str)
 {
-	write(1, str, ft_strlen(str));
+	if (!str)
+		return ;
+	(write(1, str, ft_strlen(str)));
 }
 void	ft_putchar(char c)
 {

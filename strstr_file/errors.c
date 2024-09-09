@@ -2,12 +2,7 @@
 
 int	display_error(char *error, t_file *file)
 {
-	if (file->fd)
-		ft_close(file);
-	if (file->content)
-		free(file->content);
-	if (file->filename)
-		free(file->filename);
+	free_file(file);
 	ft_putstr(error);
 	return (1);
 }
