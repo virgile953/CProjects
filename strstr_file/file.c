@@ -20,8 +20,14 @@ int	ft_close(t_file *file)
 	return (1);
 }
 
-int	open_file(t_file *file)
+int	ft_get_content(t_file *file)
 {
+	if (!file->fd)
+		if (!ft_open(file))
+			return (0);
+	if (!file->content_len)
+		if (!get_file_len(file))
+			return (0);
 }
 
 size_t	get_file_len(t_file *file)
