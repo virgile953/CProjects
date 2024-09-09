@@ -26,6 +26,7 @@ void		ft_putchar(char c);
 int			display_error(char *error, t_file *file);
 int			ft_open(t_file *file);
 int			ft_close(t_file *file);
+int			ft_get_content(t_file *file);
 size_t		get_file_len(t_file *file);
 void		ft_putnbr(int nb);
 int			ft_atoi(char *str);
