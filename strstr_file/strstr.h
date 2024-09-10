@@ -20,6 +20,14 @@ typedef struct s_file
 	size_t	content_len;
 }			t_file;
 
+typedef struct s_input
+{
+	int		count;
+	char	**args;
+	char	*to_find;
+	char	*path;
+}			t_input;
+
 typedef struct s_files
 {
 	t_file	*files;
@@ -43,14 +51,15 @@ void		ft_putnbr(int nb);
 int			ft_atoi(char *str);
 void		free_file(t_file *file);
 void		free_files(t_files *files);
+t_input		*init_tinput(void);
 t_files		*init_filesstruct(void);
 void		init_filestruct(t_file *file);
-int			init_input(t_files *files, int argc, char **argv);
 char		*ft_strcat(char *dest, char *src);
 void		get_filecount(char *path, t_files *files);
 void		get_fullname(char full_path[512], char *path, struct dirent *dir);
 void		get_filenames(char *path, t_files *files, int *i);
-int			handle_args(int argc, char **argv, t_files *files);
+int			handle_args(int argc, char **argv, t_files *files, t_input *input);
+int			init_input(t_files *files, int argc, char **argv, t_input *input);
 int			is_elf_file(char *file);
 
 #endif
