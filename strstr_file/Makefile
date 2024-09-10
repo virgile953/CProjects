@@ -2,7 +2,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-SRC = errors.c file.c inputs.c main.c maths.c strings.c strings2.c structs.c directory.c
+SRC = errors.c file.c inputs.c main.c maths.c strings.c strings2.c structs.c memory.c directory.c search.c
 
 HEADERS = strstr.h
 

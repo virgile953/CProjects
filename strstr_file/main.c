@@ -14,9 +14,9 @@ void	display_filenames(t_files *files)
 
 int	main(int argc, char **argv)
 {
-	t_files	*files;
-	t_input	*input;
-	int		i;
+	t_files		*files;
+	t_input		*input;
+	t_result	*result;
 
 	input = init_tinput();
 	files = init_filesstruct();
@@ -24,17 +24,11 @@ int	main(int argc, char **argv)
 		return (1);
 	printf("%d files\n", files->nb_files);
 	// display_filenames(files);
-	i = 0;
-	while (i < files->nb_files)
-	{
-		// printf("file read: %s / size : %ld / content len: %d / fd: %d\n",
-		// 	files->files[i].filename, files->files[i].content_len,
-		// 	ft_strlen(files->files[i].content), files->files[i].fd);
-		if (input->to_find)
-			ft_putstr(ft_strstr(files->files[i].content, input->to_find));
-		ft_close(&files->files[i]);
-		i++;
-	}
+	if (!input->to_find)
+		return (error("Arguments invalid!\n", files));
+	result = get_result(input, files);
+	if (result)
+		print_results(result);
 	return (error("File opened and closed gracefully\n", files));
 }
 

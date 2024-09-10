@@ -35,6 +35,14 @@ typedef struct s_files
 	char	*basepath;
 }			t_files;
 
+typedef struct s_result
+{
+	int		col;
+	int		line;
+	char	*filename;
+	t_file	*file;
+}			t_result;
+
 int			ft_strlen(char *str);
 int			ft_strncmp(char *s1, char *s2, int n);
 char		*ft_strstr(char *haystack, char *needle);
@@ -50,6 +58,7 @@ int			get_file_len(t_file *file);
 void		ft_putnbr(int nb);
 int			ft_atoi(char *str);
 void		free_file(t_file *file);
+void		free_file_content(t_file *file);
 void		free_files(t_files *files);
 t_input		*init_tinput(void);
 t_files		*init_filesstruct(void);
@@ -61,5 +70,7 @@ void		get_filenames(char *path, t_files *files, int *i);
 int			handle_args(int argc, char **argv, t_files *files, t_input *input);
 int			init_input(t_files *files, int argc, char **argv, t_input *input);
 int			is_elf_file(char *file);
+t_result	*get_result(t_input *input, t_files *files);
+void		print_results(t_result *result);
 
 #endif
