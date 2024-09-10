@@ -9,12 +9,12 @@ void	free_file_content(t_file *file)
 	if (file->filename)
 		free(file->filename);
 }
+
 void	init_filestruct(t_file *file)
 {
 	file->content = 0;
 	file->fd = 0;
 	file->content_len = 0;
-	file->filename = 0;
 	file->filename = 0;
 }
 
@@ -27,6 +27,7 @@ t_files	*init_filesstruct(void)
 		return (NULL);
 	files->nb_files = 0;
 	files->files = 0;
+	files->basepath = 0;
 	return (files);
 }
 
@@ -51,6 +52,8 @@ void	free_files(t_files *files)
 		i++;
 		if (files->files)
 			free(files->files);
+		if (files->basepath)
+			free(files->basepath);
 		free(files);
 	}
 }

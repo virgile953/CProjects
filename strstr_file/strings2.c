@@ -27,6 +27,7 @@ char	*ft_strdup(char *src)
 	ret[len] = 0;
 	return (ret);
 }
+
 char	*ft_strcat(char *dest, char *src)
 {
 	int	lendest;

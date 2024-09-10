@@ -13,7 +13,6 @@ void	get_filecount(char *path, t_files *files)
 		{
 			if (ft_strncmp(dir->d_name, ".", 1) == 0)
 				continue ;
-			full_path[0] = '\0';
 			get_fullname(full_path, path, dir);
 			if (dir->d_type == FT_REG)
 				files->nb_files++;
@@ -37,7 +36,6 @@ void	get_filenames(char *path, t_files *files, int *i)
 		{
 			if (ft_strncmp(dir->d_name, ".", 1) == 0)
 				continue ;
-			full_path[0] = '\0';
 			get_fullname(full_path, path, dir);
 			if (dir->d_type == FT_REG)
 			{
@@ -47,12 +45,13 @@ void	get_filenames(char *path, t_files *files, int *i)
 			if (dir->d_type == FT_DIR)
 				get_filenames(full_path, files, i);
 		}
-			closedir(d);
+		closedir(d);
 	}
 }
 
 void	get_fullname(char full_path[512], char *path, struct dirent *dir)
 {
+	full_path[0] = '\0';
 	ft_strcat(full_path, path);
 	ft_strcat(full_path, "/");
 	ft_strcat(full_path, dir->d_name);
