@@ -34,5 +34,3 @@ t_files	*init_filesstruct(void)
 	files->basepath = 0;
 	return (files);
 }
-
-

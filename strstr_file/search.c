@@ -42,9 +42,9 @@ void	print_results(t_result *result)
 	while (result[i].file)
 	{
 		ft_putstr(result[i].filename);
-		ft_putstr(": l");
+		ft_putstr(":");
 		ft_putnbr(result[i].line);
-		ft_putstr(": c");
+		ft_putstr(":");
 		ft_putnbr(result[i].col);
 		ft_putstr("\n");
 		i++;
