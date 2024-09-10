@@ -50,7 +50,7 @@ char		*ft_strcpy(char *dest, char *src);
 char		*ft_strdup(char *src);
 void		ft_putstr(char *str);
 void		ft_putchar(char c);
-int			error(char *error, t_files *files);
+int			error(char *error, t_files *files, t_input *input);
 int			ft_open(t_file *file);
 int			ft_close(t_file *file);
 int			ft_get_content(t_file *file);
